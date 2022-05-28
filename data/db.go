@@ -1,0 +1,101 @@
+package data
+
+import (
+	"errors"
+
+	"crypto/sha256"
+
+	"encoding/hex"
+
+	"database/sql"
+
+	_ "github.com/mattn/go-sqlite3"
+)
+
+var Db *sql.DB
+
+func UserExist(email string) bool {
+	_, err := Db.Query("select * from users where email = $1", email)
+	if err != nil {
+		return false
+	}
+
+	return true
+}
+
+func RegUser(name, lastname, email, password string) error {
+	h := sha256.New()
+	h.Write([]byte(password))
+
+	hash := hex.EncodeToString(h.Sum(nil))
+
+	if UserExist(email) {
+		_, err := Db.Exec("insert into users (name, lastname, email, password) values ($1, $2, $3, $4)", name, lastname, email, hash)
+		if err != nil {
+			return err
+		}
+
+		return nil
+	}
+
+	return errors.New("User is already regist.")
+}
+
+func LoginUser(name, lastname, email, password string) (error, map[string]string) {
+	row := Db.QueryRow("select name, lastname, password from users where email = $1", email)
+
+	h := sha256.New()
+	h.Write([]byte(password))
+
+	hash := hex.EncodeToString(h.Sum(nil))
+
+	var nameDb string
+	var lastnameDb string
+	var passwordHash string
+
+	err := row.Scan(&nameDb, &lastnameDb, &passwordHash)
+
+	if err != nil {
+		return err, map[string]string{"name": nameDb, "lastname": lastnameDb, "password": passwordHash}
+	}
+
+	if nameDb == name && lastnameDb == lastname && passwordHash == hash {
+		return nil, nil
+	}
+
+	return nil, nil
+}
+
+func GetUsers() (map[int]map[string]string, error) {
+	var Users = make(map[int]map[string]string)
+
+	rows, err := Db.Query("select id, name, lastname from users")
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+
+		var (
+			name     string
+			lastname string
+			// nickname string
+			id int
+		)
+
+		if err := rows.Scan(&id, &name, &lastname); err != nil {
+			return nil, err
+		}
+
+		Users[id] = map[string]string{
+			"name":     name,
+			"lastname": lastname,
+			// "nickname": nickname,
+		}
+
+	}
+
+	return Users, nil
+}

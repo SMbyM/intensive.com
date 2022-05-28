@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-41041173-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-41041173-2');
+    </script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <title>Realtime search demo</title>
+</head>
+
+<style type="text/css">
+    .search-box {
+        margin-top: 1rem;
+    }
+
+    .result {
+        margin-top: 1rem;
+    }
+
+    .list-group-item {
+        margin-top: 10px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.24);
+    }
+</style>
+
+<body>
+
+    <script>
+        async function getJson() {
+            let response = await fetch("/usersnames");
+
+            let json = await response.json();
+
+            let usersNames = [];
+
+            json.forEach(function(item){
+                usersNames.push(item)
+            })
+
+            usersNames.forEach(function(item){
+                console.log(item)
+            })
+        }
+
+        getJson();
+
+    </script>
+
+</body>

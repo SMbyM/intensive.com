@@ -1,0 +1,141 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.header {
+	position: fixed;
+	width: 100%;
+	height: 75px;
+	border: 1px solid #CACACA;
+	background-image: url(../img/Шапка.png);
+	background-size: 100% 74px;
+}
+
+.navbar {
+	width: 490px;
+	height: 60px;
+	margin-top: 6px;
+	margin-left: 240px;
+}
+
+.navbar-nav {
+	margin-top: 10px;
+	width: 506px;
+}
+
+.nav-item {
+	width: 130px;
+	margin-left: -3px;
+}
+
+img {
+	margin-top: -2px;
+	margin-right: 5px;
+}
+
+input {
+	width: 210px;
+	float: left;
+	height: 45px;
+	margin-top: -52px;
+	margin-left: 790px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 1px solid #999;
+	border-radius: 9px;
+	font-size: 18px;
+	font-family: Arial;
+}
+
+form {
+	float: right;
+	margin-top: -42px;
+	margin-right: 30px;
+}
+
+a {
+	text-decoration: none;
+	color: #000000;
+}
+
+.content {
+	width: 42%;
+	float: left;
+	height: 640px;
+	margin-top: 90px;
+	margin-left: 29%;
+	border-radius: 2px;
+	border: 1px solid #CACACA;
+}
+
+.section1 {
+	width: 100%;
+	float: left;
+	height: 60px;
+	background: #FAFAFA;
+	border-bottom: 1px solid #B6B6B6;
+}
+
+.aside {
+	width: 52px;
+	float: left;
+	height: 52px;
+	margin-top: 4px;
+	margin-left: 30%;
+	padding-top: 7px;
+	padding-left: 8px;
+	border-radius: 30px;
+	border: 1px solid #CACACA;
+}
+
+.decrition1 {
+	color: #111111;
+	font-family: Arial;
+	margin-top: 7px;
+	margin-left: 45%;
+}
+
+.decrition2 {
+	color: #ccc;
+	font-family: Tahoma;
+	margin-top: -5px;
+	margin-left: 45%;
+}
+
+.section2 {
+	width: 100%;
+	height: 50px;
+	margin-top: 580px;
+	border-top: 1px solid #CACACA;
+}
+
+input.message {
+	width: 60%;
+	height: 45px;
+	margin-top: 6px;
+	margin-left: 15px;
+	padding: 5px 10px 5px 10px;
+	border-radius: 7px;
+	border: 1px solid #999;
+	font-size: 16px;
+	font-family: Tahoma;
+}
+
+.iksweb {
+	display: inline-block;
+	float: right;
+	cursor: pointer;
+	width: 110px;
+	height: 35px;
+	margin-top: 12px;
+	margin-right: 35px;
+	padding-top: 5px;
+	padding-left: 12px;
+	color: #ffffff;
+	font-size: 17px;
+	font-family: Arial;
+	text-decoration: none;
+	background: #23a1de;
+	border-radius: 12px;
+}
