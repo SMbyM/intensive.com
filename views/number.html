@@ -7,7 +7,15 @@
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="src\css\регистрация.css">
 	<link rel="shorcut icon" href="src\img\Иконка.ico" type="image/x-ico">
-	<title> Регистрация на Intensive </title>
+	<title> Регистрация на Intensive! </title>
+	<script>
+		function ddlselect()
+		{
+			var d=document.getElementById("ddselect");
+			var displaytext=d.options[d.selectedIndex].text;
+			document.getElementById("txtvalue").value=displaytext;
+		}
+	</script>
 </head>
 
 <body>
@@ -41,7 +49,7 @@
 					<br>
 					использоваться для входа в аккаунт
 			</div>
-			<select>
+			<select id="ddselect" onchange="ddlselect();">
 				<option> Россия (+7) </option>
 				<option> Австралия (+61) </option>
 				<option> Австрия (+43) </option>
@@ -103,19 +111,10 @@
 				<option> Япония (+81) </option>
 			</select>
 			<br>
-			<input type="tel" class="text" placeholder="+7">
+			<input type="text" class="text" id="txtvalue">
 			<br>
-			<div class="hidden2">
-				<label>
-					<input type="checkbox" class="password-checkbox">
-					Я согласен с правилами,
-					<br>
-					конфиденциальностью
-					и принимаю их условия
-				</label>
-			</div>
 			<a class="iksweb" href="confirm_number.html" title="Продолжить"> Продолжить </a>
-			<div class="hidden3">
+			<div class="hidden2">
 				<a href=" "> Отменить регистрацию на Intensive </a>
 			</div>
 		</div>

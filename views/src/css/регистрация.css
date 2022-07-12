@@ -93,23 +93,12 @@ input.text {
 	font-family: Arial;
 }
 
-.hidden2 {
-	width: 200px;
-	float: left;
-	height: 77px;
-	margin-top: 5px;
-	margin-left: 63px;
-	font-family: Arial;
-	font-size: 15px;
-	color: #000000;
-}
-
 .iksweb {
 	display: inline-block;
 	cursor: pointer;
 	width: 250px;
 	height: 43px;
-	margin-top: 95px;
+	margin-top: 125px;
 	margin-left: 120px;
 	font-family: Tahoma;
 	font-size: 17px;
@@ -121,11 +110,11 @@ input.text {
 	border: 1px solid #23a1de;
 }
 
-.hidden3 {
+.hidden2 {
 	width: 300px;
 	float: left;
 	height: 20px;
-	margin-top: 155px;
+	margin-top: 207px;
 	margin-left: 100px;
 	font-size: 18px;
 }
@@ -135,7 +124,7 @@ a {
 	color: #273398;
 }
 
-.hidden4 {
+.hidden3 {
 	width: 215px;
 	float: left;
 	height: 22px;
@@ -151,7 +140,7 @@ a {
 	cursor: pointer;
 	width: 250px;
 	height: 43px;
-	margin-top: 162px;
+	margin-top: 170px;
 	margin-left: 120px;
 	font-family: Tahoma;
 	font-size: 17px;
@@ -163,7 +152,7 @@ a {
 	border: 1px solid #23a1de;
 }
 
-.hidden5 {
+.hidden4 {
 	width: 330px;
 	float: left;
 	height: 40px;
@@ -190,8 +179,8 @@ input.email {
 	display: inline-block;
 	cursor: pointer;
 	width: 175px;
-	height: 45px;
-	margin-top: 185px;
+	height: 43px;
+	margin-top: 135px;
 	margin-left: 75px;
 	font-family: Tahoma;
 	font-size: 17px;
@@ -203,25 +192,15 @@ input.email {
 	border: 1px solid #23a1de;
 }
 
-.hidden6 {
+.hidden5 {
 	width: 85px;
 	float: right;
 	height: 22px;
-	margin-top: 193px;
-	margin-right: 75px;
+	margin-top: 145px;
+	margin-right: 85px;
 	font-family: Arial;
 	font-size: 15px;
 }
-
-.hidden7 {
-	width: 275px;
-	float: left;
-	height: 20px;
-	margin-top: 30px;
-	margin-left: 100px;
-	font-size: 18px;
-}
-
 
 .checkbox {
 	margin-top: 8px;
@@ -233,7 +212,7 @@ input.email {
 	cursor: pointer;
 	width: 250px;
 	height: 43px;
-	margin-top: 162px;
+	margin-top: 111px;
 	margin-left: 120px;
 	font-family: Tahoma;
 	font-size: 17px;
