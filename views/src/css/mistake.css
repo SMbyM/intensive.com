@@ -1,0 +1,24 @@
+* {
+	margin:0;
+	padding:0;
+}
+
+.content {
+	width:50%;
+	float: left;
+	height:500px;
+    margin-top:5%;
+	margin-left:25%;
+    padding-top:30px;
+    padding-left:2%;
+}
+
+.decrition1 {
+    font-size:90px;
+    color: #A7A7A7;
+}
+
+.decrition2 {
+    margin-top:35px;
+}
+
