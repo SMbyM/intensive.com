@@ -1,5 +1,4 @@
-{{define "navbar"}}
-<div class="header">
+<div class="header" id="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -10,30 +9,37 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="Аккаунт.html"> <img src="src\img\Аккаунт.png" width="21"
+                        <a class="nav-link active" href="account.html"> <img src="src\img\account.png" width="21"
                                 height="21"> Профиль </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Сообщения.html"> <img src="src\img\Сообщение.png" width="18"
+                        <a class="nav-link" href="messages.html"> <img src="src\img\messages.png" width="18"
                                 height="18"> Сообщения </a>
                     </li>
                     <li class="nav-item">
                         <p align="center">
-                            <a class="nav-link active" href="Друзья.html"> <img src="src\img\Друзья.png" width="19"
+                            <a class="nav-link active" href="friends.html"> <img src="src\img\friends.png" width="19"
                                     height="18"> Друзья </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"> <img src="src\img\Выход.png" width="18" height="18"> Выход
+                        <a class="nav-link" href="#"> <img src="src\img\exit.png" width="18" height="18"> Выход
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <input type="search" placeholder="Поиск">
-    <form>
-        <a href=" "> Авторизация </a>
-    </form>
-</div>
 
-{{end}}
+
+
+    <input type="search" id="search" placeholder="Поиск" autocomplete='off' onmousedown="viewDiv()">
+    <script>
+
+    function viewDiv(){
+    document.getElementById("div1").style.display = "block";
+    };
+
+    </script>
+    <div id="div1"><div id='result'></div></div>
+    <script src="src\js\search.js"></script>
+</div>
