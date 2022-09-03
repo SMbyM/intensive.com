@@ -1,42 +1,37 @@
 package controllers
 
 import (
-	"github.com/gin-gonic/gin"
-
 	"github.com/gin-contrib/sessions"
+	"github.com/gin-gonic/gin"
 
 	. "intensive.com/data"
 )
 
-func AddUsers(ctx *gin.Context) {
-	err := RegUser(ctx.PostForm("name"), ctx.PostForm("lastname"), ctx.PostForm("email"), ctx.PostForm("password"))
+type UserDTO struct {
+}
+
+func AddUsers(c *gin.Context) {
+	var user UserDTO
+	err := c.ShouldBind(&user)
 
 	if err != nil {
-		ctx.JSON(500, map[string]string{"error": err.Error()})
+		c.JSON(500, map[string]string{"error": err.Error()})
 	}
 
-	ctx.Redirect(301, "/regform")
+	s := sessions.Default(c)
+
+	s.Set("name", c.PostForm("name"))
+	s.Set("lastname", c.PostForm("lastname"))
+	s.Set("email", c.PostForm("email"))
+
+	c.Redirect(301, "/account")
 }
 
-func RegForm(ctx *gin.Context) {
-	ctx.HTML(200, "regform.html", nil)
-}
-
-func GetUsersSearch(ctx *gin.Context) {
+func GetUsersSearch(c *gin.Context) {
 	users, err := GetUsers()
 
 	if err != nil {
-		ctx.JSON(500, map[string]string{"error": err.Error()})
+		c.JSON(500, map[string]string{"error": err.Error()})
 	}
-	ctx.JSON(200, users)
-}
-
-func DeleteCookies(ctx *gin.Context) {
-	s := sessions.Default(ctx)
-
-	s.Delete("name")
-	s.Delete("email")
-	s.Delete("password")
-
-	s.Save()
+	c.JSON(200, users)
 }

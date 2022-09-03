@@ -14,6 +14,10 @@ import (
 
 var Db *sql.DB
 
+func AddMessage() {
+
+}
+
 func UserExist(email string) bool {
 	_, err := Db.Query("select * from users where email = $1", email)
 	if err != nil {
@@ -29,7 +33,7 @@ func RegUser(name, lastname, email, password string) error {
 
 	hash := hex.EncodeToString(h.Sum(nil))
 
-	if UserExist(email) {
+	if !UserExist(email) {
 		_, err := Db.Exec("insert into users (name, lastname, email, password) values ($1, $2, $3, $4)", name, lastname, email, hash)
 		if err != nil {
 			return err

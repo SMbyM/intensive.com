@@ -36,15 +36,21 @@ func InitRouters(router *gin.Engine) {
 
 	// router.POST("/login", LoginUserPost)
 
-	router.GET("/regform", RegForm)
-
-	router.POST("/regform", AddUsers)
+	router.POST("/intensive", AddUsers)
 
 	router.GET("/intensive", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "Intensive.html", nil)
 	})
 
-	router.GET("/deletecookies", DeleteCookies)
+	router.GET("/account", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK,
+			"account.html",
+			gin.H{
+				"name":     sessions.Default(ctx).Get("name"),
+				"lastname": sessions.Default(ctx).Get("lastname"),
+				"nickname": sessions.Default(ctx).Get("nickname"),
+			})
+	})
 
 	router.POST("/first_reg", firstreg)
 
@@ -70,6 +76,7 @@ func main() {
 	}
 
 	InitRouters(router)
+	ConfigureChatControllers(router)
 
 	router.Run(":8888")
 }
