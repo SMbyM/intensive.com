@@ -11,12 +11,20 @@ const DATA = [
         nickname: 'ivanivanov'
     }, 
 
-    {
-        name: 'Derek',
-        lastname: 'Denik',
-        nickname: 'denik'
-    }, 
 
+    {
+        name: 'Ivan',
+        lastname: 'Ivanov',
+        nickname: 'ivanivanov'
+    }, 
+	
+	
+    {
+        name: 'Ivan',
+        lastname: 'Ivanov',
+        nickname: 'ivanivanov'
+    }, 
+	
     {
         name: 'Vlad',
         lastname: 'Vladov',
@@ -25,7 +33,7 @@ const DATA = [
 
 ];
 
-let userProf = '<div class="menu">';
+let userProf = '<div class="user">';
 for (let i = 0; i < DATA.length; i++) {
   userProf += "<a href='Чат.html'>" + "<h7>" + DATA[i].name  + ' ' + "</h7>" + 
     "<h7>"  + DATA[i].lastname  + "</h7>" + 
