@@ -12,19 +12,8 @@ import (
 
 	. "intensive.com/controllers"
 	. "intensive.com/data"
+	. "intensive.com/errors"
 )
-
-func firstreg(ctx *gin.Context) {
-	ctx.JSON(200, map[string]string{
-		"name":     ctx.PostForm("name"),
-		"lastname": ctx.PostForm("lastname"),
-		"nickname": ctx.PostForm("nickname"),
-		"day":      ctx.PostForm("day"),
-		"month":    ctx.PostForm("month"),
-		"year":     ctx.PostForm("year"),
-		"male":     ctx.PostForm("radio"),
-	})
-}
 
 func InitRouters(router *gin.Engine) {
 
@@ -36,7 +25,7 @@ func InitRouters(router *gin.Engine) {
 
 	// router.POST("/login", LoginUserPost)
 
-	router.POST("/intensive", AddUsers)
+	router.POST("/intensive", nil)
 
 	router.GET("/intensive", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "Intensive.html", nil)
@@ -52,14 +41,19 @@ func InitRouters(router *gin.Engine) {
 			})
 	})
 
-	router.POST("/first_reg", firstreg)
+	router.GET("/users", GetUsersSearch)
 
-	router.GET("/usersnames", GetUsersSearch)
+	router.POST("/reg", Reg)
 
-	router.GET("/", func(ctx *gin.Context) {
-		ctx.HTML(200, "search.prototype.html", nil)
-	})
+	router.POST("/login", LoginSite)
 
+	router.POST("/set_friends", SetFriends)
+
+	router.GET("/friends/:id", GetFriends)
+
+	router.GET("/users_data/:id", GetUserData)
+
+	router.GET("/get_search", GetUsersSearch)
 }
 
 func main() {
@@ -72,6 +66,10 @@ func main() {
 	defer Db.Close()
 
 	if err != nil {
+		go GlobalErrorsHandler.SendError(Error{
+			Err:      err,
+			Location: "main.go >> line 62",
+		})
 		log.Fatal(err)
 	}
 

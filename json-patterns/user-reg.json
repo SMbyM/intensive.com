@@ -1,4 +1,12 @@
 {
-  "url": "",
-  "": ""
+  "name": "",
+  "lastname": "",
+  "nickname": "",
+  "email": "",
+  "password": "",
+  "phone": "",
+  "male": "",
+  "day": "",
+  "month": "",
+  "year": ""
 }

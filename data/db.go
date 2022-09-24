@@ -14,10 +14,6 @@ import (
 
 var Db *sql.DB
 
-func AddMessage() {
-
-}
-
 func UserExist(email string) bool {
 	_, err := Db.Query("select * from users where email = $1", email)
 	if err != nil {
@@ -27,7 +23,7 @@ func UserExist(email string) bool {
 	return true
 }
 
-func RegUser(name, lastname, email, password string) error {
+func RegUser(name, lastname, email, password, phone, male, birthday string) error {
 	h := sha256.New()
 	h.Write([]byte(password))
 
@@ -45,7 +41,7 @@ func RegUser(name, lastname, email, password string) error {
 	return errors.New("User is already regist.")
 }
 
-func LoginUser(name, lastname, email, password string) (error, map[string]string) {
+func LoginUser(name, lastname, email, password string) (error, bool) {
 	row := Db.QueryRow("select name, lastname, password from users where email = $1", email)
 
 	h := sha256.New()
@@ -60,20 +56,20 @@ func LoginUser(name, lastname, email, password string) (error, map[string]string
 	err := row.Scan(&nameDb, &lastnameDb, &passwordHash)
 
 	if err != nil {
-		return err, map[string]string{"name": nameDb, "lastname": lastnameDb, "password": passwordHash}
+		return err, false
 	}
 
 	if nameDb == name && lastnameDb == lastname && passwordHash == hash {
-		return nil, nil
+		return nil, true
 	}
 
-	return nil, nil
+	return nil, false
 }
 
 func GetUsers() (map[int]map[string]string, error) {
 	var Users = make(map[int]map[string]string)
 
-	rows, err := Db.Query("select id, name, lastname from users")
+	rows, err := Db.Query("select name, lastname, nickname from users")
 
 	if err != nil {
 		return nil, err
@@ -84,19 +80,20 @@ func GetUsers() (map[int]map[string]string, error) {
 
 		var (
 			name     string
+			nickname string
 			lastname string
 			// nickname string
 			id int
 		)
 
-		if err := rows.Scan(&id, &name, &lastname); err != nil {
+		if err := rows.Scan(&name, &lastname, &name, &nickname); err != nil {
 			return nil, err
 		}
 
 		Users[id] = map[string]string{
 			"name":     name,
 			"lastname": lastname,
-			// "nickname": nickname,
+			"nickname": nickname,
 		}
 
 	}
