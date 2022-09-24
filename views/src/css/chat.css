@@ -39,7 +39,7 @@ input {
 	float: left;
 	height: 45px;
 	margin-top: -52px;
-	margin-left: 54%;
+	margin-left: 59%;
 	padding-left: 10px;
 	padding-right: 10px;
 	border: 1px solid #999;
@@ -50,11 +50,12 @@ input {
 
 #div1 {
 	width: 210px;
+	margin-left: 59%;
 	margin-top: 10px;
-	margin-left: 54%;
 	position: fixed;
 	display: none;
 	background: white;
+	overflow: auto;
 	border:1px solid #CBCBCB;
 }
 
@@ -84,11 +85,11 @@ a {
 }
 
 .content {
-	width: 37%;
+	width: 39%;
 	float: left;
 	height: 640px;
 	margin-top: 100px;
-	margin-left: 31%;
+	margin-left: 30%;
 	border-radius: 9px;
 	border: 1px solid #CACACA;
 }
@@ -171,9 +172,10 @@ a {
 
 input.message {
 	width: 70%;
+	float: left;
 	height: 45px;
-	margin-top: 6px;
-	margin-left: 5px;
+	margin-top: 7px;
+	margin-left: 23px;
 	padding: 5px 10px 5px 10px;
 	border-radius: 7px;
 	border: 1px solid #999;
@@ -192,13 +194,11 @@ button {
 	width: 110px;
 	height: 35px;
 	margin-top: 12px;
-	margin-right: 20px;
-	padding-top: 5px;
-	padding-left: 12px;
+	margin-right: 7px;
 	color: #ffffff;
 	font-size: 17px;
 	font-family: Arial;
 	text-decoration: none;
 	background: #23a1de;
-	border-radius: 12px;
+	border-radius: 10px;
 }

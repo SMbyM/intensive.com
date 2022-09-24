@@ -38,7 +38,7 @@ input {
 	float: left;
 	height: 45px;
 	margin-top: -52px;
-	margin-left: 54%;
+	margin-left: 59%;
 	padding-left: 10px;
 	padding-right: 10px;
 	border: 1px solid #999;
@@ -49,19 +49,20 @@ input {
 
 #div1 {
 	width: 210px;
+	margin-left: 59%;
 	margin-top: 10px;
-	margin-left: 54%;
 	position: fixed;
 	display: none;
 	background: white;
+	overflow: auto;
 	border:1px solid #CBCBCB;
 }
 
-.menu {
+.user {
 	width: 100%;
 }
 
-.menu a {
+.user a {
 	color: black;
 	display: block;
 	height: 50px;
@@ -73,7 +74,7 @@ input {
 	border-bottom: 1px solid #ccc;
 }
 
-.menu a:hover {
+.user a:hover {
 	background-color: #ccc;
 }
 
@@ -83,13 +84,14 @@ a {
 }
 
 .content {
-	width: 37%;
+	width: 40%;
 	float: left;
+	min-height: 500px;
 	height: 80%;
-	position: absolute;
-	position: fixed;
+	max-height: 500px;
 	margin-top: 100px;
-	margin-left: 31%;
+	margin-left: 29%;
+	overflow: auto;
 	border-radius: 2px;
 	border: 1px solid #CACACA;
 }
