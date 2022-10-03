@@ -5,44 +5,47 @@
     <meta charset UTF-8>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="import" href="navbar.html">
     <link rel="stylesheet" href="/src/css/user.css">
     <link rel="shorcut icon" href="/src/img/icon.ico" type="image/x-ico">
     <title> Мой Аккуант </title>
 </head>
 
 <body>
-    {{template "navbar.html".}}
-        <div class="content">
-            <div class="section1">
-                <img src="/src/img/avatar.png" width="160" height="160">
-            </div>
-            <a class="iksweb" href=" ">
-                Написать
-            </a>
-            <div class="section2">
-                <h3 class="decrition1">
-                    Имя Фамилия
-                </h3>
-                <h4 class="decrition2">
-                    Никнейм
-                </h4>
-                <h5 class="decrition3">
-                    Дата Рождения: 21.03.1983
-                </h5>
-                <h5 class="decrition4">
-                    Пол: Мужской
-                </h5>
-                <h5 class="decrition5">
-                    Телефон: +7(986)-567-64-32
-                </h5>
-                <h5 class="decrition6">
-                    E-mail: hrhhr.@mail.com
-                </h5>
-            </div>
-        </div>
-    </div>
 
+    {{template "navbar.html".}}
+
+    <div class="content">
+
+        <div class="section1">
+            <img src="/src/img/avatar.png" width="160" height="160">
+        </div>
+
+        <button class="iksweb">
+            Изменить
+        </button>
+
+        <div class="section2">
+            <h3 class="decrition1">
+                Имя Фамилия
+            </h3>
+            <h4 class="decrition2">
+                Никнейм
+            </h4>
+            <h5 class="decrition3">
+                Дата Рождения: 21.03.1983
+            </h5>
+            <h5 class="decrition3">
+                Пол: Мужской
+            </h5>
+            <h5 class="decrition3">
+                Телефон: +7(986)-567-64-32
+            </h5>
+            <h5 class="decrition3">
+                E-mail: hrhhr.@mail.com
+            </h5>
+        </div>
+
+    </div>
     
 </body>
 

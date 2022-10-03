@@ -87,7 +87,7 @@ a {
 .content {
 	width: 50%;
 	float: left;
-	height: 350px;
+	height: 370px;
 	margin-top: 165px;
 	margin-left: 25%;
 	background: #FDFDFD;
@@ -109,18 +109,36 @@ a {
 
 }
 
+.ikswee {
+	display: inline-block;
+	float: left;
+	cursor: pointer;
+	font-size: 18px;
+	text-decoration: none;
+	margin-top: 255px;
+	margin-left: -200px;
+	padding: 4px 63px;
+	color: #ffffff;
+	background: #23a1de;
+	border-radius: 6px;
+}
+
 .iksweb {
 	display: inline-block;
 	float: left;
 	cursor: pointer;
 	font-size: 18px;
 	text-decoration: none;
-	margin-top: 275px;
-	margin-left: -200px;
-	padding: 4px 63px;
+	margin-top: 310px;
+	margin-left: -205px;
+	padding: 4px 65px;
 	color: #000248;
 	background: #ccc;
 	border-radius: 6px;
+}
+
+button {
+	border: none;
 }
 
 .section2 {
@@ -134,7 +152,7 @@ a {
 .decrition1 {
 	color: #111111;
 	font-family: Arial;
-	font-size: 22px;
+	font-size: 28px;
 	margin-top: 15px;
 	margin-left: 75px;
 }
@@ -149,31 +167,7 @@ a {
 .decrition3 {
 	color: #303030;
 	font-family: Arial;
-	font-size: 16px;
-	margin-top: 35px;
-	margin-left: 95px;
-}
-
-.decrition4 {
-	color: #303030;
-	font-family: Arial;
-	font-size: 16px;
-	margin-top: 8px;
-	margin-left: 95px;
-}
-
-.decrition5 {
-	color: #303030;
-	font-family: Arial;
-	font-size: 16px;
-	margin-top: 8px;
-	margin-left: 95px;
-}
-
-.decrition6 {
-	color: #303030;
-	font-family: Arial;
-	font-size: 16px;
-	margin-top: 8px;
-	margin-left: 96px;
+	font-size: 18px;
+	margin-top: 15px;
+	margin-left: 75px;
 }
