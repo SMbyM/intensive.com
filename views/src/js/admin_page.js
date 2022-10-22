@@ -20,7 +20,8 @@ window.onload = (e) => {
 
 ws.onmessage = (msg) => {
     if (msg.type === '5') {
-
+        let error = msg.
+        errors.appendChild();
     } else if (msg.type === '6') {
 
     } else {

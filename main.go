@@ -12,7 +12,6 @@ import (
 
 	. "intensive.com/controllers"
 	. "intensive.com/data"
-	. "intensive.com/errors"
 )
 
 func InitRouters(router *gin.Engine) {
@@ -66,10 +65,6 @@ func main() {
 	defer Db.Close()
 
 	if err != nil {
-		go GlobalErrorsHandler.SendError(Error{
-			Err:      err,
-			Location: "main.go >> line 62",
-		})
 		log.Fatal(err)
 	}
 
