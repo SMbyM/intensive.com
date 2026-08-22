@@ -1,0 +1,14 @@
+.env
+
+dist/
+build/
+/cmd/server/server
+/cmd/server/server.exe
+
+.log
+
+.db
+.sqlite
+
+.idea/
+.vscode/
