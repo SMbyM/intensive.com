@@ -1,4 +1,4 @@
-package models
+package friends
 
 type FriendDTO struct {
 	Fst int `json:"fst"`

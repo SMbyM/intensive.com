@@ -1,6 +1,6 @@
 module intensive.com
 
-go 1.18
+go 1.23
 
 require (
 	github.com/gin-contrib/sessions v0.0.5

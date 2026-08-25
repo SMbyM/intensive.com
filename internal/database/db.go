@@ -1,4 +1,4 @@
-package data
+package database
 
 import (
 	"errors"
@@ -82,8 +82,7 @@ func GetUsers() (map[int]map[string]string, error) {
 			name     string
 			nickname string
 			lastname string
-			// nickname string
-			id int
+			id       int
 		)
 
 		if err := rows.Scan(&name, &lastname, &name, &nickname); err != nil {

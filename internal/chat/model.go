@@ -1,4 +1,4 @@
-package models
+package chat
 
 type Msg struct {
 	User int64  `json:"user"`
