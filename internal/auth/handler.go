@@ -1,21 +1,34 @@
-package controllers
+package auth
 
 import (
+	"context"
 	"fmt"
+
 	"github.com/gin-gonic/gin"
-	. "intensive.com/data"
-	. "intensive.com/models"
+	"intensive.com/internal/database"
 )
 
-func Reg(c *gin.Context) {
-	var user UserDTO
+type authService interface {
+	RegUser(ctx context.Context, user UserProfile) error
+	LoginUser(ctx context.Context, user UserProfile) error
+}
+
+type Handler struct {
+	service authService
+}
+
+func NewHandler(s authService) *Handler {
+	return &Handler{service: s}
+}
+
+func (h *Handler) Reg(c *gin.Context) {
+	var user UserProfile
 	if err := c.ShouldBindJSON(&user); err != nil {
 		fmt.Println("package controllers >> authControllers.go >> line 12")
 		c.JSON(500, map[string]string{"error": err.Error()})
 	}
-	date := user.Day + "." + user.Month + "." + user.Year
 
-	err := RegUser(user.Name, user.Lastname, user.Email, user.Password, user.Phone, user.Male, date)
+	err := h.service.RegUser(c.Request.Context(), user)
 	if err != nil {
 		fmt.Println("package controllers >> authControllers.go >> line 121")
 		c.HTML(500, "mistake.html", nil)
@@ -23,13 +36,13 @@ func Reg(c *gin.Context) {
 	c.Redirect(301, "/account")
 }
 
-func LoginSite(c *gin.Context) {
-	var user UserDTO
+func (h *Handler) LoginSite(c *gin.Context) {
+	var user UserProfile
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(500, map[string]string{"error": err.Error()})
 	}
 
-	err, _ := LoginUser(user.Name, user.Lastname, user.Email, user.Password)
+	err := h.service.LoginUser(c.Request.Context(), user)
 	if err != nil {
 		fmt.Println("package controllers >> authControllers.go >> line 38")
 		c.HTML(500, "mistake.html", nil)
@@ -38,7 +51,7 @@ func LoginSite(c *gin.Context) {
 }
 
 func GetUsersSearch(c *gin.Context) {
-	users, err := GetUsers()
+	users, err := database.GetUsers()
 
 	if err != nil {
 		fmt.Println("package controllers >> authControllers.go >> line 50")

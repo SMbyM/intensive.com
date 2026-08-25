@@ -1,17 +1,17 @@
-package main
+package chat
 
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"golang.org/x/exp/slices"
-	"gopkg.in/olahol/melody.v1"
 	"net/http"
 	"strconv"
 	"strings"
 
-	. "intensive.com/data"
-	. "intensive.com/models"
+	"github.com/gin-gonic/gin"
+	"golang.org/x/exp/slices"
+	"gopkg.in/olahol/melody.v1"
+
+	"intensive.com/internal/database"
 )
 
 type DTO struct {
@@ -19,6 +19,7 @@ type DTO struct {
 }
 
 var m = melody.New()
+var Db = database.Db
 
 func ConfigureChatControllers(r *gin.Engine) {
 
@@ -40,7 +41,7 @@ func GetChat(c *gin.Context) {
 		chatList []int
 	)
 	r, err := Db.Query("select id from chat")
-	if err != nil {
+	if r.Err() != nil || err != nil {
 		fmt.Println("chat:49")
 		c.HTML(505, "mistake.html", nil)
 	}

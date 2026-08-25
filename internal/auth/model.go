@@ -1,6 +1,6 @@
-package models
+package auth
 
-type UserDTO struct {
+type UserProfile struct {
 	Name     string `json:"name"`
 	Lastname string `json:"lastname"`
 	Nickname string `json:"nickname"`
@@ -11,5 +11,4 @@ type UserDTO struct {
 	Day      string `json:"day"`
 	Month    string `json:"month"`
 	Year     string `json:"year"`
-	Birthday string `json:"birthday"`
 }

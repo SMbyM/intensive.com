@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -10,8 +11,10 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 
-	. "intensive.com/controllers"
-	. "intensive.com/data"
+	"intensive.com/internal/account"
+	"intensive.com/internal/auth"
+	"intensive.com/internal/chat"
+	"intensive.com/internal/database"
 )
 
 func InitRouters(router *gin.Engine) {
@@ -19,10 +22,8 @@ func InitRouters(router *gin.Engine) {
 	store := cookie.NewStore([]byte("secret"))
 	router.Use(sessions.Sessions("intensive.comsession", store))
 
-	router.LoadHTMLGlob("views/*.html")
-	router.Static("/src", "./views/src")
-
-	// router.POST("/login", LoginUserPost)
+	router.LoadHTMLGlob("../../web/views/*.html")
+	router.Static("/src", "../../web/views/src")
 
 	router.POST("/intensive", nil)
 
@@ -39,20 +40,17 @@ func InitRouters(router *gin.Engine) {
 				"nickname": sessions.Default(ctx).Get("nickname"),
 			})
 	})
+	api := router.Group("/api")
 
-	router.GET("/users", GetUsersSearch)
+	accountHandler := account.New(database.Db)
+	accountHandler.RegisterRoutes(api)
 
-	router.POST("/reg", Reg)
+	authHandler := auth.New(database.Db)
+	authHandler.RegisterRoutes(api)
 
-	router.POST("/login", LoginSite)
+	router.GET("/users", auth.GetUsersSearch)
 
-	router.POST("/set_friends", SetFriends)
-
-	router.GET("/friends/:id", GetFriends)
-
-	router.GET("/users_data/:id", GetUserData)
-
-	router.GET("/get_search", GetUsersSearch)
+	router.GET("/get_search", auth.GetUsersSearch)
 }
 
 func main() {
@@ -60,16 +58,17 @@ func main() {
 
 	db, err := sql.Open("sqlite3", "data/intensive.db")
 
-	Db = db
+	database.Db = db
 
-	defer Db.Close()
+	defer database.Db.Close()
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	InitRouters(router)
-	ConfigureChatControllers(router)
-
+	chat.ConfigureChatControllers(router)
+	fmt.Println("Hello, world!")
 	router.Run(":8888")
+	fmt.Println("Hello, world!")
 }
