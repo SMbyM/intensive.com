@@ -3,7 +3,8 @@
 dist/
 build/
 /cmd/server/server
-/cmd/server/server.exe
+
+server
 
 .log
 
@@ -12,3 +13,5 @@ build/
 
 .idea/
 .vscode/
+
+issues/
