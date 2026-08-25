@@ -7,12 +7,24 @@ import (
 
 	"encoding/hex"
 
+	"context"
 	"database/sql"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 var Db *sql.DB
+
+func Connect(databaseURL string) (*sql.DB, error) {
+	db, err := sql.Open("pgx", databaseURL)
+	if err != nil {
+		return nil, err
+	}
+	if err := db.PingContext(context.Background()); err != nil {
+		return nil, err
+	}
+	return db, nil
+}
 
 func UserExist(email string) bool {
 	_, err := Db.Query("select * from users where email = $1", email)

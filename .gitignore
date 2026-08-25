@@ -6,9 +6,9 @@ build/
 
 server
 
-.log
+*.log
 
-.db
+*.db
 .sqlite
 
 .idea/
