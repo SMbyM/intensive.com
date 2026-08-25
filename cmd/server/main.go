@@ -22,8 +22,8 @@ func InitRouters(router *gin.Engine) {
 	store := cookie.NewStore([]byte("secret"))
 	router.Use(sessions.Sessions("intensive.comsession", store))
 
-	router.LoadHTMLGlob("../../web/views/*.html")
-	router.Static("/src", "../../web/views/src")
+	router.LoadHTMLGlob("web/views/*.html")
+	router.Static("/src", "web/views/src")
 
 	router.POST("/intensive", nil)
 
@@ -69,6 +69,6 @@ func main() {
 	InitRouters(router)
 	chat.ConfigureChatControllers(router)
 	fmt.Println("Hello, world!")
-	router.Run(":8888")
+	router.Run(":8080")
 	fmt.Println("Hello, world!")
 }
