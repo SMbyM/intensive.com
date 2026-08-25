@@ -1,10 +1,9 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
-	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 
@@ -56,15 +55,12 @@ func InitRouters(router *gin.Engine) {
 func main() {
 	router := gin.Default()
 
-	db, err := sql.Open("sqlite3", "data/intensive.db")
-
+	db, err := database.Connect(os.Getenv("DATABASE_URL"))
 	database.Db = db
-
-	defer database.Db.Close()
-
 	if err != nil {
-		log.Fatal(err)
+		panic(err.Error())
 	}
+	defer database.Db.Close()
 
 	InitRouters(router)
 	chat.ConfigureChatControllers(router)
