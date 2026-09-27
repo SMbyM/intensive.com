@@ -30,7 +30,7 @@ services:
   backend:
     build: .
     ports:
-      - "8080:8080"
+      - "8000:8000"
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/intensive?sslmode=disable
     depends_on:

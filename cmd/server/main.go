@@ -65,6 +65,6 @@ func main() {
 	InitRouters(router)
 	chat.ConfigureChatControllers(router)
 	fmt.Println("Hello, world!")
-	router.Run(":8080")
+	router.Run(":8000")
 	fmt.Println("Hello, world!")
 }
