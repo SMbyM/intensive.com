@@ -1,8 +1,8 @@
 package friends
 
 type FriendDTO struct {
-	Fst int `json:"fst"`
-	Snd int `json:"snd"`
+	Fst int32 `json:"fst"`
+	Snd int32 `json:"snd"`
 }
 
 type FriendsDTO struct {
