@@ -1,7 +1,7 @@
 package account
 
-type UserProfile struct {
-	ID       int    `json:"id"`
+type User struct {
+	ID       int32    `json:"id"`
 	Name     string `json:"name"`
 	Lastname string `json:"lastname"`
 	Nickname string `json:"nickname"`
@@ -12,6 +12,6 @@ type UserProfile struct {
 }
 
 type Friendship struct {
-	Fst int `json:"fst"`
-	Snd int `json:"snd"`
+	Fst int32 `json:"fst"`
+	Snd int32 `json:"snd"`
 }

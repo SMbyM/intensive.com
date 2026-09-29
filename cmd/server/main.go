@@ -1,9 +1,12 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"os"
+
+	"github.com/jackc/pgx/v5/pgxpool"
 
 	"github.com/gin-gonic/gin"
 
@@ -13,10 +16,10 @@ import (
 	"intensive.com/internal/account"
 	"intensive.com/internal/auth"
 	"intensive.com/internal/chat"
-	"intensive.com/internal/database"
+	"intensive.com/internal/database/generated"
 )
 
-func InitRouters(router *gin.Engine) {
+func InitRouters(router *gin.Engine, q *generated.Queries) {
 
 	store := cookie.NewStore([]byte("secret"))
 	router.Use(sessions.Sessions("intensive.comsession", store))
@@ -39,32 +42,28 @@ func InitRouters(router *gin.Engine) {
 				"nickname": sessions.Default(ctx).Get("nickname"),
 			})
 	})
+
 	api := router.Group("/api")
 
-	accountHandler := account.New(database.Db)
+	accountHandler := account.New(q)
 	accountHandler.RegisterRoutes(api)
 
-	authHandler := auth.New(database.Db)
+	authHandler := auth.New(q)
 	authHandler.RegisterRoutes(api)
-
-	router.GET("/users", auth.GetUsersSearch)
-
-	router.GET("/get_search", auth.GetUsersSearch)
 }
 
 func main() {
 	router := gin.Default()
 
-	db, err := database.Connect(os.Getenv("DATABASE_URL"))
-	database.Db = db
+	db, err := pgxpool.New(context.Background(), os.Getenv("DATABASE_URL"))
 	if err != nil {
 		panic(err.Error())
 	}
-	defer database.Db.Close()
+	queries := generated.New(db)
 
-	InitRouters(router)
+	InitRouters(router, queries)
 	chat.ConfigureChatControllers(router)
 	fmt.Println("Hello, world!")
-	router.Run(":8000")
+	router.Run(os.Getenv("PORT"))
 	fmt.Println("Hello, world!")
 }
