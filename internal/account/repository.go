@@ -2,65 +2,56 @@ package account
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
+	"time"
+
+	"github.com/jackc/pgx/v5/pgtype"
+	"intensive.com/internal/database/generated"
 )
 
 type Repository struct {
-	db *sql.DB
+	db *generated.Queries
 }
 
-func NewRepository(db *sql.DB) *Repository {
+func NewRepository(db *generated.Queries) *Repository {
 	return &Repository{db: db}
 }
 
-func (r *Repository) GetUserByID(ctx context.Context, uid int) (UserProfile, error) {
-	var u UserProfile
-	err := r.db.QueryRowContext(ctx,
-		"SELECT id, name, lastname, nickname, email, phone, male, birthday FROM users WHERE id = $1",
-		uid,
-	).Scan(&u.ID, &u.Name, &u.Lastname, &u.Nickname, &u.Email, &u.Phone, &u.Male, &u.Birthday)
+func (r *Repository) GetUserByID(ctx context.Context, uid int32) (User, error) {
+	u, err := r.db.GetUserById(ctx, uid)
 
 	if err != nil {
-		return UserProfile{}, fmt.Errorf("get user by id: %w", err)
+		return User{}, fmt.Errorf("get user by id: %w", err)
 	}
-	return u, nil
+	return User{
+		ID: u.ID,
+		Name: u.Name,
+		Lastname: u.Lastname, 
+		Nickname: *u.Nickname, 
+		Email: u.Email,
+		Phone: *u.Phone, 
+		Male: *u.Male, 
+		Birthday: u.Birthday.Time.String(),
+		}, nil
 }
 
-func (r *Repository) SetFriendship(ctx context.Context, fst int, snd int) error {
-	if _, err := r.db.ExecContext(
-		ctx,
-		"insert into friends values ($1, $2)",
-		fst,
-		snd,
-	); err != nil {
-		return err
+func (r *Repository) UpdateUserProfile(ctx context.Context, user User) error {
+	time, err := time.Parse("2006-01-02", user.Birthday)
+	if err != nil {
+		return fmt.Errorf("parse birthday: %w", err)
+	}
+	birthday := pgtype.Date{Time: time, Valid: true}
+	if e := r.db.UpdateUserProfile(ctx, generated.UpdateUserProfileParams{
+		ID: user.ID,
+		Name: &user.Name,
+		Lastname: &user.Lastname,
+		Nickname: &user.Nickname,
+		Phone: &user.Phone,
+		Male: &user.Male,
+		Birthday: birthday,
+	});
+	e != nil {
+		return fmt.Errorf("update user profile: %w", err)
 	}
 	return nil
-}
-
-func (r *Repository) GetFriendList(ctx context.Context, uid int) ([]UserProfile, error) {
-	var friends []UserProfile
-
-	rows, err := r.db.QueryContext(ctx, "select snd from friends where fst=$1", uid)
-	if err != nil || rows.Err() != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var snd int
-		err := rows.Scan(&snd)
-		if err != nil {
-			fmt.Println("accountControllers:31")
-			return nil, err
-		}
-		res, err := r.GetUserByID(ctx, snd)
-		if err != nil {
-			fmt.Println("accountControllers:43")
-			return nil, err
-		}
-		friends = append(friends, res)
-	}
-	return friends, nil
 }

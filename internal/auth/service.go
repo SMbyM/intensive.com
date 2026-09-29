@@ -13,8 +13,8 @@ var (
 )
 
 type authRepository interface {
-	RegUser(ctx context.Context, user UserProfile) error
-	LoginUser(ctx context.Context, user UserProfile) error
+	RegisterUser(ctx context.Context, user User) (User, error)
+	LoginUser(ctx context.Context, user User) (User, error)
 }
 
 type Service struct {
@@ -25,12 +25,12 @@ func NewService(r authRepository) *Service {
 	return &Service{repo: r}
 }
 
-func (s *Service) RegUser(ctx context.Context, user UserProfile) error {
+func (s *Service) RegisterUser(ctx context.Context, user User) (User, error) {
 	if f, err := regexp.MatchString(
 		`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`,
 		user.Email,
 	); !f || err != nil {
-		return errors.Join(ErrorInvalidEmail, err)
+		return User{}, errors.Join(ErrorInvalidEmail, err)
 	}
 
 	h := sha256.New()
@@ -39,15 +39,15 @@ func (s *Service) RegUser(ctx context.Context, user UserProfile) error {
 	hash := hex.EncodeToString(h.Sum(nil))
 	user.Password = hash
 
-	return s.repo.RegUser(ctx, user)
+	return s.repo.RegisterUser(ctx, user)
 }
 
-func (s *Service) LoginUser(ctx context.Context, user UserProfile) error {
+func (s *Service) LoginUser(ctx context.Context, user User) (User, error) {
 	if f, err := regexp.MatchString(
 		`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`,
 		user.Email,
 	); !f || err != nil {
-		return errors.Join(ErrorInvalidEmail, err)
+		return User{}, errors.Join(ErrorInvalidEmail, err)
 	}
 
 	h := sha256.New()

@@ -1,6 +1,7 @@
 package auth
 
-type UserProfile struct {
+type User struct {
+	ID       int32    `json:"id"`
 	Name     string `json:"name"`
 	Lastname string `json:"lastname"`
 	Nickname string `json:"nickname"`
